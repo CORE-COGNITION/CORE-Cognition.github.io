@@ -1,0 +1,14 @@
+# LaTeX build artifacts — keep the .tex source and the .pdf output, drop the rest
+*.aux
+*.log
+*.out
+*.synctex.gz
+*.fls
+*.fdb_latexmk
+*.toc
+*.bbl
+*.blg
+
+# Editor / OS cruft
+.DS_Store
+Thumbs.db

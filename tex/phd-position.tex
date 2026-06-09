@@ -1,0 +1,196 @@
+% =============================================================================
+%  CORE COGNITION — PhD Position
+%  A clean, one-page recruitment flyer styled to match the lab website.
+%
+%  Build:  pdflatex phd-position.tex      (no Perl / latexmk needed)
+%          or just press  Ctrl+Alt+B  in VSCode.
+%
+%  The LOOK lives in the THEME block below (palette + motifs lifted verbatim
+%  from styles.css). The WORDS live in the CONTENT block under \begin{document}
+%  — edit the text there and rebuild.
+% =============================================================================
+\documentclass[11pt]{article}
+
+% ----------------------------- THEME ----------------------------------------
+
+% Fonts: clean sans throughout (the website uses a system sans stack)
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[default]{lato}               % modern, friendly sans, as the document default
+\usepackage[protrusion=true,expansion=false]{microtype} % spacing polish (expansion off: FA glyphs aren't scalable)
+
+% Palette — taken verbatim from the site's styles.css :root
+\usepackage{xcolor}
+\definecolor{brand}{HTML}{29485D}        % deep slate blue  — headings, lab name
+\definecolor{brandbright}{HTML}{006699}  % brighter blue    — links, accents
+\definecolor{branddark}{HTML}{00445F}    % darker blue
+\definecolor{brandtint}{HTML}{BFD9E6}    % light blue       — soft fills
+\definecolor{ink}{HTML}{263238}          % body text
+\definecolor{inksoft}{HTML}{455A64}      % secondary text
+\definecolor{hairline}{HTML}{D8DDE0}     % hairline borders
+
+% Page geometry
+\usepackage[a4paper, margin=0.5in]{geometry}
+
+% Toolkit
+\usepackage{graphicx}
+\graphicspath{{../}{./}}                  % find core-mark.png in the site root
+\usepackage{enumitem}
+\usepackage[most]{tcolorbox}
+\usepackage{fontawesome5}
+\usepackage{eso-pic}                      % full-width accent bar at the top edge
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true, urlcolor=brandbright, linkcolor=brandbright,
+  pdftitle={PhD Position — CORE COGNITION},
+  pdfauthor={Marcel Binz},
+}
+
+% Block-paragraph rhythm: no indents, air between blocks (like the web body)
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.32em}
+
+% Brand-blue bullets
+\setlist[itemize]{label=\textcolor{brand}{\textbullet}, leftmargin=1.5em,
+                  itemsep=2pt, topsep=2pt, parsep=0pt}
+
+% Section headings = the site's h2 (brand colour, semibold, no numbers)
+\titleformat{\section}{\color{brand}\bfseries\large}{}{0pt}{}
+\titlespacing*{\section}{0pt}{0.42em}{0.3em}
+
+% Full-width brand accent bar across the very top of every page
+\AddToShipoutPictureBG{%
+  \AtPageUpperLeft{\raisebox{-4pt}{\color{brandbright}\rule{\paperwidth}{4pt}}}%
+}
+
+% Lab lockup: "CORE COGNITION" with the bullseye mark as the O
+\newcommand{\coremark}{\raisebox{-0.04em}{\includegraphics[height=0.80em]{core-mark.png}}}
+\newcommand{\corelockup}{%
+  \textcolor{brand}{\textbf{C\coremark RE}\hspace{0.22em}\textmd{COGNITION}}%
+}
+
+% Small reusable bits
+\newcommand{\accentrule}{{\color{brandbright}\rule{1.7cm}{2.5pt}}}
+\newcommand{\divider}{\noindent{\color{hairline}\rule{\linewidth}{0.6pt}}}
+% middle-dot separator drawn from the (scalable) text bullet — crisp at any zoom
+\newcommand{\dotsep}{\hspace{0.5em}\raisebox{0.1ex}{\footnotesize\textcolor{inksoft}{\textbullet}}\hspace{0.5em}}
+
+% "How to apply" box: light grey fill, hairline border, rounded corners
+\newtcolorbox{callout}{
+  enhanced, breakable,
+  colback=black!4, colframe=hairline, boxrule=0.6pt, arc=3pt,
+  left=16pt, right=16pt, top=9pt, bottom=9pt,
+}
+
+% Page footer — lives in the bottom margin (like the site footer), so it never
+% competes with the body for space. Mirrors the website's footer line.
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\setlength{\footskip}{22pt}
+\fancyfoot[L]{%
+  \rlap{\raisebox{2.6ex}{\color{hairline}\rule{\textwidth}{0.6pt}}}%
+  \footnotesize\color{inksoft}%
+  \corelockup\dotsep Max Planck Institute for Biological Cybernetics, Tübingen\dotsep%
+  \href{https://www.kyb.tuebingen.mpg.de/en}{kyb.tuebingen.mpg.de}%
+}
+
+% =============================================================================
+\begin{document}
+\color{ink}
+
+% ----------------------------- CONTENT --------------------------------------
+
+% --- Masthead --------------------------------------------------------------
+\noindent
+\begin{minipage}[c]{0.55\linewidth}
+{\fontsize{19}{22}\selectfont \corelockup}\\[5pt]
+{\color{inksoft}\small Max Planck Institute for Biological Cybernetics\dotsep Tübingen}
+\end{minipage}\hfill
+\begin{minipage}[c]{0.43\linewidth}
+\raggedleft
+\includegraphics[height=1.2cm]{mpi-kyb.png}%
+\end{minipage}
+
+\vspace{8pt}
+\divider
+\vspace{10pt}
+
+% Lead / invitation — one or two sentences.
+{\large\color{inksoft}%
+The \corelockup{} lab, led by Marcel Binz, is recruiting fully
+funded \textbf{PhD students} (E13, 75\%). The expected start date is
+October 1st, 2026, but later starting dates are possible by agreement. Funding is secured for at least four years. \par}
+
+% --- About the group -------------------------------------------------------
+\section*{About the group}
+We work towards a \textbf{unified theory of human cognition}, taking the form of
+\textbf{computational models} that can simulate, predict, and explain human behavior
+across a wide range of situations. The group is part of the
+\href{https://www.kyb.tuebingen.mpg.de/en}{Max Planck Institute for Biological Cybernetics}
+in Tübingen, a vibrant student town at
+the foot of the Swabian alps and one of Europe's leading hubs for cognitive 
+science and machine learning research. More information
+on our \href{https://XXX}{lab webpage}.
+
+% --- About the position ----------------------------------------------------
+\section*{About the position}
+You will work on one of the lab's research directions:
+\begin{itemize}
+  \item Foundation models of human cognition
+  \item Modeling human behavior in naturalistic environments (e.g. conversations, games, coding)
+  \item Automated scientific discovery for the cognitive sciences
+  \item AI alignment
+ 
+\end{itemize}
+
+% --- Requirements ----------------------------------------------------------
+\section*{What we are looking for}
+\begin{itemize}
+  \item Master's degree (or equivalent) in cognitive science, computer science, machine learning, or a related field.
+  \item Intellectual curiosity, initiative, and the ability to communicate clearly.
+  \item Strong programming skills (Python, PyTorch, Claude Code, or similar tools).
+  \item Prior research experience in machine learning, cognitive science, or a related area.
+  \item Familiarity with large language models or modern deep learning workflows is a plus.
+  \item Willingness to work on-site in Tübingen.
+\end{itemize}
+
+% --- What we offer ---------------------------------------------------------
+\section*{What we offer}
+\begin{itemize}
+  \item The opportunity to work on frontier research at the intersection of machine learning and cognitive science.
+  \item An international research environment with collaborators at DeepMind, Princeton, Harvard, and beyond.
+  \item Proven track record of high-impact publications in venues such as Nature, PNAS, NeurIPS, ICLR, and ICML.
+  \item Large-scale compute through the Max Planck ecosystem.
+  \item Participation in the \href{https://imprs.is.mpg.de/}{IMPRS-IS} graduate school.
+  \item Room to shape a young, ambitious, and growing research group.
+\end{itemize}
+
+% --- How to apply ----------------------------------------------------------
+\section*{How to apply}
+\begin{callout}
+Please email the following as a single PDF to
+\href{mailto:marcelbinz1@gmail.com}{marcelbinz1@gmail.com},
+with \textbf{“PhD-CORE-2026”} in the subject line:
+\begin{itemize}
+  \item Cover letter describing your previous achievements and research interests (one page)
+  \item Curriculum vitae
+  \item Academic transcripts and certificates
+\end{itemize}
+
+\vspace{5pt}
+Applications will be considered until \textbf{July 10th, 2026}, or until the
+positions are filled. The Max Planck Society is committed to employing diverse
+individuals and strives for gender equity and diversity. We welcome applications
+from individuals of all backgrounds and explicitly encourage members of
+underrepresented groups to apply.
+
+\vspace{5pt}
+{\color{inksoft}If you have any questions, feel free to reach out to
+\href{mailto:marcelbinz1@gmail.com}{marcelbinz1@gmail.com}.}
+\end{callout}
+
+\end{document}

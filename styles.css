@@ -1,0 +1,360 @@
+/* =========================================================================
+   Binz Lab — stylesheet
+   Minimal, academic, hackable. No build step, no dependencies.
+
+   To re-theme the whole site, edit the CSS variables in :root below.
+   Palette is taken from the MPI for Biological Cybernetics (Tübingen).
+   ========================================================================= */
+
+:root {
+  /* Brand colors (from kyb.tuebingen.mpg.de) */
+  --brand:        #29485d; /* deep slate blue — headings, lab name */
+  --brand-bright: #006699; /* brighter blue — links, accents */
+  --brand-dark:   #00445f; /* darker blue — hovers */
+  --brand-tint:   #bfd9e6; /* light blue — soft fills */
+
+  /* Neutrals */
+  --ink:        #263238;   /* body text */
+  --ink-soft:   #455a64;   /* secondary text */
+  --line:       #d8dde0;   /* hairline borders */
+  --bg:         #eef1f3;   /* grey page background (only surface) */
+
+  /* Type — system sans throughout, no CDN dependency */
+  --sans:  -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+           Arial, sans-serif;
+
+  /* Layout */
+  --container: 820px;
+}
+
+/* ---------- Reset-ish ---------------------------------------------------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; scrollbar-gutter: stable; }
+
+body {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--ink);
+  background: var(--bg);
+  /* thin brand accent line across the very top of the page */
+  border-top: 4px solid var(--brand-bright);
+}
+
+/* ---------- Accessibility ----------------------------------------------- */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--brand);
+  color: #fff;
+  padding: 10px 16px;
+  z-index: 100;
+}
+.skip-link:focus { left: 8px; top: 8px; }
+
+:focus-visible {
+  outline: 3px solid var(--brand-bright);
+  outline-offset: 2px;
+}
+/* skip-link sends focus here; no visible ring needed on the content wrapper */
+main:focus { outline: none; }
+
+/* ---------- Header / nav ------------------------------------------------- */
+.site-header {
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+}
+
+.site-header__inner {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 18px 24px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 24px;
+}
+
+.brand {
+  text-decoration: none;
+  border-bottom: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.32em;
+}
+.brand-word {
+  display: inline-flex;
+  align-items: center;
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: var(--brand);
+  letter-spacing: 0.02em;
+  line-height: 1;
+}
+/* the bullseye emblem standing in for the "O" — tweak height to taste */
+.brand-o {
+  height: 0.8em;
+  width: auto;
+  margin: 0 0.03em;
+  position: relative;
+  top: 0.06em;   /* nudge the emblem down to sit on the baseline; increase to lower */
+}
+.brand-lab {
+  font-size: 1.7rem;
+  font-weight: 400;
+  color: var(--brand);
+  line-height: 1;
+}
+.brand:hover { opacity: 0.8; }
+
+/* reusable inline "CORE Lab" lockup — scales with the surrounding text size.
+   Usage: <span class="core" role="img" aria-label="CORE Lab">C<img
+   class="core-o" src="core-mark.png" alt="">RE<span class="lab">Lab</span></span> */
+.core {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  color: var(--brand);
+  font-weight: 700;
+}
+.core .lab { font-weight: 400; margin-left: 0.26em; }
+.core-o {
+  height: 0.8em;
+  width: auto;
+  margin: 0 0.02em;   /* a bit more breathing room around the emblem in running text */
+  position: relative;
+  top: 0.02em;       /* vertical baseline nudge (raise/lower to taste) */
+}
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 20px;
+}
+.nav a {
+  font-size: 1rem;
+  color: var(--ink-soft);
+  text-decoration: none;
+  padding: 2px 0;
+  border-bottom: 2px solid transparent;
+}
+.nav a:hover { color: var(--brand-bright); }
+.nav a[aria-current="page"] {
+  color: var(--brand-bright);
+  border-bottom-color: var(--brand-bright);
+}
+
+/* ---------- Main content area ------------------------------------------- */
+main {
+  max-width: var(--container);
+  margin: 40px auto;
+  padding: 0 24px;
+}
+
+/* .card is now just a spacing wrapper — no white box */
+.card {
+  padding: 8px 0 48px;
+}
+
+/* ---------- Photo / figure ---------------------------------------------- */
+.photo {
+  margin: 2rem 0 0;
+}
+.photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+.photo figcaption {
+  margin-top: 8px;
+  color: var(--ink-soft);
+  font-size: 0.88rem;
+}
+
+/* ---------- Typography --------------------------------------------------- */
+h1 {
+  font-weight: 600;
+  font-size: 2.1rem;
+  line-height: 1.2;
+  color: var(--brand);
+  margin: 0 0 0.5rem;
+}
+/* short accent rule under the page title */
+h1 + .rule {
+  width: 64px;
+  height: 3px;
+  background: var(--brand-bright);
+  border: 0;
+  margin: 0 0 1.6rem;
+}
+
+h2 {
+  font-weight: 600;
+  font-size: 1.4rem;
+  color: var(--brand);
+  margin: 2.4rem 0 0.8rem;
+}
+
+h3 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 1.6rem 0 0.3rem;
+}
+
+p { margin: 0 0 1.1rem; }
+
+.lead {
+  font-size: 1.2rem;
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+
+a {
+  color: var(--brand-bright);
+  text-decoration: none;
+  border-bottom: 1px solid var(--brand-tint);
+}
+a:hover { color: var(--brand-dark); border-bottom-color: var(--brand-bright); }
+
+strong { color: var(--brand); }
+
+/* ---------- Challenges list (Main page) --------------------------------- */
+.challenges {
+  margin: 0.8rem 0 0 1.2rem;
+  padding: 0;
+}
+.challenges li {
+  margin-bottom: 0.5rem;
+}
+.challenges .label {
+  font-weight: 600;
+  color: var(--brand);
+}
+/* bullet markers in the brand blue */
+.challenges li::marker,
+.doclist li::marker { color: var(--brand); }
+
+/* ---------- People grid -------------------------------------------------- */
+.people-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 28px 24px;
+  margin: 1.2rem 0 0;
+}
+.person {
+  text-align: center;
+}
+.person .avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 110px;
+  height: 110px;
+  margin: 0 auto 12px;
+  border-radius: 50%;
+  background: var(--brand-tint);
+  color: var(--brand-dark);
+  font-size: 1.6rem;
+  object-fit: cover;       /* applies when avatar is an <img> */
+  overflow: hidden;
+}
+.person .name { font-weight: 600; color: var(--brand); }
+.person .role { font-size: 0.92rem; color: var(--ink-soft); }
+.person .links { font-size: 0.85rem; margin-top: 4px; }
+
+/* Open position slots — a hollow dashed circle that reads as an invitation */
+.person--open .avatar {
+  background: transparent;
+  border: 2px solid var(--brand);
+  color: var(--brand);   /* matches the CORE logo/text blue */
+}
+.person--open .avatar-icon { width: 56px; height: 56px; }
+
+/* ---------- Resource links (Resources page) ----------------------------- */
+.resource-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  margin: 1rem 0;
+}
+.resource {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 92px;
+  color: var(--brand);
+  text-decoration: none;
+  border-bottom: 0;
+}
+.resource-icon { height: 100px; width: auto; }
+.resource span { font-weight: 600; font-size: 0.95rem; color: var(--brand); }
+.resource:hover span { color: var(--brand-bright); }
+.resource:hover .resource-icon { opacity: 0.82; }
+
+/* Documents list + highlighted acronym initials (the \color{Hred} letters) */
+.doclist { margin: 0.8rem 0 0 1.2rem; padding: 0; }
+.doclist li { margin-bottom: 0.4rem; }
+.acro { color: var(--brand); font-weight: 700; }
+
+/* ---------- Simple link lists (Open Positions) -------------------------- */
+.linklist { list-style: none; margin: 0.4rem 0 0; padding: 0; }
+.linklist li { padding: 7px 0; border-bottom: 1px solid var(--line); }
+.linklist li:last-child { border-bottom: 0; }
+.linklist .meta { color: var(--ink-soft); font-size: 0.92rem; }
+
+/* ---------- Callout (Open Positions) ------------------------------------ */
+.callout {
+  background: rgba(0,0,0,0.04);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 20px 24px;
+  margin: 1.4rem 0;
+}
+
+.button {
+  display: inline-block;
+  background: var(--brand);
+  color: #fff;
+  padding: 11px 22px;
+  border-radius: 4px;
+  border: 0;
+  text-decoration: none;
+  font-weight: 600;
+}
+.button:hover { background: var(--brand-dark); color: #fff; }
+
+/* editorial helper for placeholders you should fill in */
+.todo {
+  background: #fffbe6;
+  border: 1px dashed #d6c560;
+  color: #6b5d00;
+  font-size: 0.85rem;
+  padding: 2px 7px;
+  border-radius: 3px;
+}
+
+/* ---------- Footer ------------------------------------------------------- */
+.site-footer {
+  max-width: var(--container);
+  margin: 8px auto 48px;
+  padding: 20px 24px 0;
+  border-top: 1px solid var(--line);
+  color: var(--ink-soft);
+  font-size: 0.88rem;
+}
+.site-footer a { border-bottom: 0; }
+
+/* ---------- Responsive --------------------------------------------------- */
+@media (max-width: 640px) {
+  body { font-size: 14px; }
+  h1 { font-size: 1.7rem; }
+  .site-header__inner { padding: 16px 20px; }
+  main { padding: 0 16px; }
+}
