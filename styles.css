@@ -87,8 +87,6 @@ main:focus { outline: none; }
   gap: 0.32em;
 }
 .brand-word {
-  display: inline-flex;
-  align-items: center;
   font-size: 1.7rem;
   font-weight: 700;
   color: var(--brand);
@@ -100,8 +98,9 @@ main:focus { outline: none; }
   height: 0.8em;
   width: auto;
   margin: 0 0.03em;
-  position: relative;
-  top: 0.06em;   /* nudge the emblem down to sit on the baseline; increase to lower */
+  vertical-align: baseline; /* sit on the text baseline, like a real letter — */
+  position: relative;       /* font-metric independent, so it aligns on every device */
+  top: 0.06em;   /* the only knob: + lowers the emblem, − raises it */
 }
 .brand-lab {
   font-size: 1.7rem;
@@ -115,8 +114,6 @@ main:focus { outline: none; }
    Usage: <span class="core" role="img" aria-label="CORE Lab">C<img
    class="core-o" src="core-mark.png" alt="">RE<span class="lab">Lab</span></span> */
 .core {
-  display: inline-flex;
-  align-items: center;
   white-space: nowrap;
   color: var(--brand);
   font-weight: 700;
@@ -126,8 +123,9 @@ main:focus { outline: none; }
   height: 0.8em;
   width: auto;
   margin: 0 0.02em;   /* a bit more breathing room around the emblem in running text */
+  vertical-align: baseline;
   position: relative;
-  top: 0.02em;       /* vertical baseline nudge (raise/lower to taste) */
+  top: 0.06em;       /* + lowers the emblem, − raises it */
 }
 
 .nav {
