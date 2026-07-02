@@ -1,0 +1,176 @@
+% =============================================================================
+%  CORE COGNITION — Lab Manual
+%  A living document styled to match the lab website and recruitment flyers.
+%
+%  Build:  pdflatex lab-manual.tex        (no Perl / latexmk needed)
+%          or just press  Ctrl+Alt+B  in VSCode.
+%
+%  The LOOK lives in the THEME block below (palette + motifs lifted verbatim
+%  from styles.css, shared with the position flyers). The WORDS live in the
+%  CONTENT block under \begin{document} — edit the text there and rebuild.
+% =============================================================================
+\documentclass[11pt]{article}
+
+% ----------------------------- THEME ----------------------------------------
+
+% Fonts: clean sans throughout (the website uses a system sans stack)
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[default]{lato}               % modern, friendly sans, as the document default
+\usepackage[protrusion=true,expansion=false]{microtype} % spacing polish (expansion off: FA glyphs aren't scalable)
+
+% Palette — taken verbatim from the site's styles.css :root
+\usepackage{xcolor}
+\definecolor{brand}{HTML}{29485D}        % deep slate blue  — headings, lab name
+\definecolor{brandbright}{HTML}{006699}  % brighter blue    — links, accents
+\definecolor{branddark}{HTML}{00445F}    % darker blue
+\definecolor{brandtint}{HTML}{BFD9E6}    % light blue       — soft fills
+\definecolor{ink}{HTML}{263238}          % body text
+\definecolor{inksoft}{HTML}{455A64}      % secondary text
+\definecolor{hairline}{HTML}{D8DDE0}     % hairline borders
+
+% Page geometry
+\usepackage[a4paper, margin=0.5in]{geometry}
+
+% Toolkit
+\usepackage{graphicx}
+\graphicspath{{../}{./}}                  % find core-mark.png in the site root
+\usepackage{enumitem}
+\usepackage[most]{tcolorbox}
+\usepackage{fontawesome5}
+\usepackage{eso-pic}                      % full-width accent bar at the top edge
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true, urlcolor=brandbright, linkcolor=brandbright,
+  pdftitle={Lab Manual — CORE COGNITION},
+  pdfauthor={Marcel Binz},
+}
+
+% Block-paragraph rhythm: no indents, air between blocks (like the web body)
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.22em}
+
+% Brand-blue bullets
+\setlist[itemize]{label=\textcolor{brand}{\textbullet}, leftmargin=1.5em,
+                  itemsep=2pt, topsep=2pt, parsep=0pt}
+
+% Section headings = the site's h2 (brand colour, semibold, no numbers)
+\titleformat{\section}{\color{brand}\bfseries\large}{}{0pt}{}
+\titlespacing*{\section}{0pt}{0.42em}{0.2em}
+
+% Full-width brand accent bar across the very top of every page
+\AddToShipoutPictureBG{%
+  \AtPageUpperLeft{\raisebox{-4pt}{\color{brandbright}\rule{\paperwidth}{4pt}}}%
+}
+
+% Lab lockup: "CORE COGNITION" with the bullseye mark as the O
+\newcommand{\coremark}{\raisebox{-0.04em}{\includegraphics[height=0.80em]{core-mark.png}}}
+\newcommand{\corelockup}{%
+  \textcolor{brand}{\textbf{C\coremark RE}\hspace{0.22em}\textmd{COGNITION}}%
+}
+
+% Small reusable bits
+\newcommand{\accentrule}{{\color{brandbright}\rule{1.7cm}{2.5pt}}}
+\newcommand{\divider}{\noindent{\color{hairline}\rule{\linewidth}{0.6pt}}}
+% middle-dot separator drawn from the (scalable) text bullet — crisp at any zoom
+\newcommand{\dotsep}{\hspace{0.5em}\raisebox{0.1ex}{\footnotesize\textcolor{inksoft}{\textbullet}}\hspace{0.5em}}
+
+% Inline lead-in for a paragraph, e.g. "\leadin{Working together.} The core..."
+\newcommand{\leadin}[1]{\textbf{\textcolor{brand}{#1}}}
+
+% No footer — the manual runs on a single clean page.
+\pagestyle{empty}
+
+% =============================================================================
+\begin{document}
+\color{ink}
+
+% ----------------------------- CONTENT --------------------------------------
+
+% --- Masthead --------------------------------------------------------------
+\noindent{\fontsize{24}{28}\selectfont\color{brand}\bfseries Lab Manual}
+
+\vspace{5pt}
+\divider
+\vspace{7pt}
+
+% Lead / invitation
+{\color{inksoft}%
+This lab manual lays out what we work on, how we work together, and what we
+expect from one another. It's a living document that will be updated as
+required.\par}
+
+% --- Mission ---------------------------------------------------------------
+\section*{Mission}
+We work towards a \textbf{unified theory of human cognition}, taking the form of
+computational models that can simulate, predict, and explain human behavior
+across a wide range of situations. That involves solving several challenges:
+\begin{itemize}
+  \item \leadin{The engineering challenge:} How do we build such models in the first place?
+  \item \leadin{The scientific challenge:} How do we use them to understand something about human cognition?
+  \item \leadin{The applied challenge:} How do we translate this understanding into real-world applications?
+\end{itemize}
+Beyond this, we are interested in automated scientific discovery, alignment, and
+cognition in naturalistic environments.
+
+% --- Roles -----------------------------------------------------------------
+\section*{Roles}
+\begin{itemize}
+  \item \leadin{PI:} sets research direction and works closely with every member on their projects.
+  \item \leadin{Postdocs:} establish their own research programs in collaboration with the PI.
+  \item \leadin{PhD students:} grow into fully independent researchers over the course of their PhD.
+  \item \leadin{Research assistants:} get their first research experiences.
+\end{itemize}
+
+% --- Expectations ----------------------------------------------------------
+\section*{Expectations}
+\leadin{Working together.} The core office days are Tuesday to Thursday.
+Everyone is expected to be present in the lab on those days (of course excluding
+vacation, sickness, or emergencies). Research assistants are expected to be in
+the lab one or two days a week, depending on their contract. We hold a weekly
+lab meeting with expected attendance. Be on time, communicate when you can't be,
+and keep shared spaces tidy. The lab language is English and our main
+communication channel is Slack.
+
+\leadin{Research norms.} Everyone, including research assistants, fully owns
+their main research project. If you contributed to a project, you will be a co-author
+on an eventual publication, and authorship order is discussed early. I expect a
+first draft with the majority of results and story four weeks before a deadline
+— otherwise we don't push for it. We make all our data and code open-source
+whenever possible.
+
+% --- Supervision -----------------------------------------------------------
+\section*{Supervision}
+\leadin{Meetings.} We meet weekly one-on-one — use the time as you want, whether
+for project updates, research discussion, or career advice. These meetings may
+become less frequent as you grow more senior. We also hold appraisal meetings,
+where we can discuss more high-level topics, every six months. If you have any
+criticism, worries, or anything else, please bring it up as early as possible.
+Furthermore, we will organize a lab retreat once per year.
+
+\leadin{Trajectory.} Your first project is closely staked out and supervised,
+usually within my own core expertise and lower-risk by design, aiming for a
+publication within a year. Independence grows with each subsequent project, with
+the goal of full scientific independence by the end of your PhD. Postdocs are
+expected to develop their own independent research program with the help of my
+input. My main goal is to equip you as best as I can for your next position.
+
+\leadin{Logistics.} The default duration for a PhD is four years, with funding
+guaranteed for the full duration. PhD students enroll and graduate via
+\href{https://imprs.is.mpg.de/}{IMPRS-IS}. Lab visits and internships of up to
+six months are encouraged, and I'll help facilitate them where I can. Travel for
+conferences defaults to one international and one close-by conference per year, with a
+summer school encouraged early in the PhD, and anything beyond that is
+case-by-case.
+
+% --- Wellbeing -------------------------------------------------------------
+\section*{Wellbeing}
+If you are ill or need time, stay home and take care of yourself. You are not
+expected to work weekends, holidays, or late nights. We own our mistakes, stay
+honest, celebrate our wins, and — most importantly — have fun. The lab must be
+free of harassment and discrimination, and we are committed to a diverse,
+inclusive environment where people of all backgrounds can do their best work.
+
+\end{document}
